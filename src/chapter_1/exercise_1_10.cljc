@@ -1,6 +1,7 @@
 (ns chapter-1.exercise-1-10)
 
-(defn A [x y]
+(defn A
+  [x y]
   (cond (zero? y) 0
         (zero? x) (* 2 y)
         (= y 1) 2

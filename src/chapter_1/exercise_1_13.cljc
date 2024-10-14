@@ -1,22 +1,18 @@
 (ns chapter-1.exercise-1-13
-  (:require [clojure.string :as str]
-            [clojure.math :as math]))
+  (:require [clojure.math :as math]))
 
-(defn fib-iter [n]
+(defn fib-iter
+  [n]
   (loop [a 1 b 0 count n]
     (if (<= count 0)
       b
       (recur (+ a b) a (dec count)))))
 
-(defn print-rows-of-10 [f]
-  (println (str/join "\n" (for [row (range 3)]
-                            (str/join " "
-                                      (for [n (->> (range)
-                                                   (drop (* 10 row))
-                                                   (take 10))]
-                                        (f n)))))))
+(defn print-all
+  [f n]
+  (apply println (for [n (range (inc n))] (f n))))
 
-(print-rows-of-10 fib-iter)
+(print-all fib-iter 30)
 ; 0 1 1 2 3 5 8 13 21 34
 ; 55 89 144 233 377 610 987 1597 2584 4181
 ; 6765 10946 17711 28657 46368 75025 121393 196418 317811 514229
@@ -25,19 +21,21 @@
 (def phi (/ (+ 1 sqrt5)
             2))
 
-(defn fib-round [n]
+(defn fib-round
+  [n]
   (math/round (/ (math/pow phi n)
                  sqrt5)))
 
-(print-rows-of-10 fib-round)
+(print-all fib-round 30)
 
 (def phi-conj (/ (- 1 sqrt5) 2))
-(defn fib-exact [n]
+(defn fib-exact
+  [n]
   (/ (+ (math/pow phi n)
         (math/pow phi-conj n))
      sqrt5))
 
-(print-rows-of-10 fib-exact)
+(print-all fib-exact 30)
 
 ; 0.8944271909999159 0.4472135954999579 1.3416407864998738 1.7888543819998317 3.130495168499706 4.919349550499538 8.049844718999244 12.969194269498782 21.01903898849803 33.98823325799682
 ; 55.00727224649484 88.99550550449165 144.00277775098652 232.99828325547819 377.0010610064647 609.999344261943 987.0004052684077 1596.9997495303508 2584.0001547987586 4180.999904329109

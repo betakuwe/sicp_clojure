@@ -1,18 +1,17 @@
-(ns chapter-1.exercise-1-12
-  (:require [clojure.string :as str]))
+(ns chapter-1.exercise-1-12)
 
-(defn pascal [row col]
+(defn pascal
+  [row col]
   (cond
     (or (<= row 0) (<= col 0) (< row col)) 0
     (or (= 1 col) (= row col)) 1
     :else (+ (pascal (dec row) (dec col))
              (pascal (dec row) col))))
 
-(println (str/join "\n"
-                   (for [row (range 1 10)]
-                     (str/join " "
-                               (for [col (range 1 (inc row))]
-                                 (pascal row col))))))
+(doseq [row (range 1 10)]
+  (apply println
+         (for [col (range 1 (inc row))]
+           (pascal row col))))
 
 ; 1
 ; 1 1
