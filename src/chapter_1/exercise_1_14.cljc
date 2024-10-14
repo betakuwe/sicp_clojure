@@ -21,7 +21,7 @@
 
 (println (count-change 100)) ; 292
 
-;; it's like O(2^n)
+;; it's like O(2^n) in time and space
 ; (cc 11 5)
 ;     (cc 11 4)
 ;         (cc 11 3)
