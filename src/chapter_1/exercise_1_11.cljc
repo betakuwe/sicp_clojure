@@ -1,4 +1,5 @@
-(ns chapter-1.exercise-1-11)
+(ns chapter-1.exercise-1-11
+  (:require [clojure.string :as str]))
 
 (defn f-recur [n]
   (if (< n 3)
@@ -12,3 +13,15 @@
     (if (<= counter 0)
       c
       (recur (+ a (* 2 b) (* 3 c)) a b (dec counter)))))
+
+(println "Recursively")
+(println (str/join " "
+                   (for [n (range 10)]
+                     (f-recur n))))
+; => 0 1 2 4 11 25 59 142 335 796
+
+(println "Iteratively")
+(println (str/join " "
+                   (for [n (range 10)]
+                     (f-iter n))))
+; => 0 1 2 4 11 25 59 142 335 796
